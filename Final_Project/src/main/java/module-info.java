@@ -11,6 +11,7 @@ module org.example_1.final_project {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires metadata.extractor;
 
     opens org.example_1.final_project to javafx.fxml;
     exports org.example_1.final_project;

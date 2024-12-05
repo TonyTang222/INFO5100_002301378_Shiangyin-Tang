@@ -1,16 +1,17 @@
 package org.example_1.final_project;
 
-// ImageDetails.java
 public class ImageDetails {
     private int width;
     private int height;
     private String camera;
+    private String location;  // Added location field
 
     // Constructor to initialize image properties
-    public ImageDetails(int width, int height, String camera) {
+    public ImageDetails(int width, int height, String camera, String location) {
         this.width = width;
         this.height = height;
         this.camera = camera;
+        this.location = location;
     }
 
     // Getters and setters for encapsulation
@@ -38,8 +39,16 @@ public class ImageDetails {
         this.camera = camera;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     // Method to display image properties
     public void displayProperties() {
-        System.out.println("Width: " + width + ", Height: " + height + ", Camera: " + camera);
+        System.out.println("Width: " + width + ", Height: " + height + ", Camera: " + camera + ", Location: " + location);
     }
 }
