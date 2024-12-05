@@ -16,19 +16,43 @@ public class ImageConverter extends AbstractImageManager {
 
     @Override
     public void convertImages(String format, Stage primaryStage) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.bmp"));
-        File file = fileChooser.showSaveDialog(primaryStage);
+        FileChooser openFileChooser = new FileChooser();
+        openFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png", "*.bmp"));
+        File inputFile = openFileChooser.showOpenDialog(primaryStage);
 
-        if (file != null) {
+        if (inputFile != null) {
             try {
-                BufferedImage bufferedImage = ImageIO.read(file);
-                File outputFile = new File(file.getParent(), "converted_image." + format);
-                ImageIO.write(bufferedImage, format, outputFile);
-                System.out.println("Image converted and saved as " + outputFile.getName());
+                BufferedImage bufferedImage = ImageIO.read(inputFile);
+
+                if (bufferedImage == null) {
+                    System.out.println("Invalid or unsupported image file.");
+                    return;
+                }
+
+                // Normalize the format for consistency
+                if ("jpeg".equalsIgnoreCase(format)) {
+                    format = "jpg";
+                }
+
+                FileChooser saveFileChooser = new FileChooser();
+                saveFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*." + format));
+                File outputFile = saveFileChooser.showSaveDialog(primaryStage);
+
+                if (outputFile != null) {
+                    boolean result = ImageIO.write(bufferedImage, format, outputFile);
+                    if (result) {
+                        System.out.println("Image converted and saved as: " + outputFile.getAbsolutePath());
+                    } else {
+                        System.out.println("Failed to save image. Ensure the format is supported.");
+                    }
+                } else {
+                    System.out.println("Save operation cancelled.");
+                }
             } catch (IOException e) {
                 System.out.println("Error converting image: " + e.getMessage());
             }
+        } else {
+            System.out.println("No input file selected.");
         }
     }
 

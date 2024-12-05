@@ -85,15 +85,5 @@ public class ImageManagerApp extends Application {
     private void convertImages(String format) {
         // Convert images using the imageUploader
         imageUploader.convertImages(format, primaryStage);
-
-        // Allow the user to choose the download location
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*" + "." + format));
-        File file = fileChooser.showSaveDialog(primaryStage);
-
-        if (file != null) {
-            // Handle saving the converted file
-            System.out.println("Converted file saved at: " + file.getAbsolutePath());
-        }
     }
 }
