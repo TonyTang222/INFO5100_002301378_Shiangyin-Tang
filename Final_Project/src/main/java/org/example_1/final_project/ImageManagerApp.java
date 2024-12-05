@@ -42,7 +42,7 @@ public class ImageManagerApp extends Application {
         // Set up image conversion format options
         ComboBox<String> formatComboBox = new ComboBox<>();
         formatComboBox.getItems().addAll("png", "jpeg", "bmp");
-        formatComboBox.setValue("jpeg");
+        formatComboBox.setValue("png");
 
         Button convertButton = new Button("Convert Images");
         convertButton.setOnAction(e -> convertImages(formatComboBox.getValue()));
